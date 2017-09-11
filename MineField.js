@@ -4,33 +4,34 @@ angular.module('minefield', [])
 function MinefieldController($scope) {
     var minefield = {};
     minefield.rows = [];
-    
-    for(var i = 0; i < 9; i++) {
+
+    for(var i = 0; i < 10; i++) {
         var row = {};
-        row.spots = [];
+        row.squares = [];
         
-        for(var j = 0; j < 9; j++) {
-            var spot = {};
-            spot.clicked = true;
-            spot.isMined = false;
-            row.spots.push(spot);
+        for(var j = 0; j < 10; j++) {
+            var square = {};
+            square.clicked = true;
+            square.isMined = false;
+            row.squares.push(square);
         }
         
         minefield.rows.push(row);
     }
-    $scope.minefield = minefield;
+   // $scope.minefield = minefield;
+    placeManyMines(minefield);
     return minefield;
 }
 
-MinefieldController.prototype.randomSpot(minefield, row, col) {
-  return minefield.rows[row].spots[col];
+function randomSpot(minefield, row, col) {
+  return minefield.rows[row].squares[col];
 }
 
 function mineRandom(minefield) {
   var row = Math.round(Math.random() * 8);
   var col = Math.round(Math.random() * 8);
-  var spot = randomSpot(minefield, row, col);
-  spot.isMined = true;
+  var square = randomSpot(minefield, row, col);
+  square.isMined = true;
 }
 
 function placeManyMines(minefield) {
