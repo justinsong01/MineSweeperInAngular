@@ -21,14 +21,19 @@
  
     <table border="1">
         <tr ng-repeat="row in mine_grid.rows">
-            <td ng-repeat="spot in row.spots" ng-click="spot.clicked = false">
-            <img ng-if="spot.clicked" src="http://luis-perez.s3-us-west-2.amazonaws.com/angularjs-minesweeper-game/covered.png" />
-                <img ng-if="!spot.clicked && !spot.isMined" src="http://luis-perez.s3-us-west-2.amazonaws.com/angularjs-minesweeper-game/empty.png" />
-                <img ng-if="!spot.clicked && spot.isMined" src="http://luis-perez.s3-us-west-2.amazonaws.com/angularjs-minesweeper-game/mine.png" />
+            <td ng-repeat="square in row.squares" ng-click="square.clicked = false">
+            <img ng-if="square.clicked" src="http://luis-perez.s3-us-west-2.amazonaws.com/angularjs-minesweeper-game/covered.png" />
+                <img ng-if="!square.clicked && !square.isMined" src="http://luis-perez.s3-us-west-2.amazonaws.com/angularjs-minesweeper-game/empty.png" />
+                <img ng-if="!square.clicked && square.isMined" src="http://luis-perez.s3-us-west-2.amazonaws.com/angularjs-minesweeper-game/mine.png" />
                            
             </td>
+
         </tr>
     </table>
+
+<br>
+    <label for="width">Width</label><input name="width" type="number" min="1" max="50" ng-model="width_length" />
+<label for="height">Height</label><input name="height" type="number" min="1" max="50" ng-model="height_length" />
               
 </div>
 </body>
