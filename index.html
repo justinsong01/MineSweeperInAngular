@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+     <script src="Minefield.js"></script>
+</head>
+<body>
+
+<div ng-app="minefield" id="minefield" ng-controller="MinefieldController as mine_grid">
+ 
+    <table border="1">
+        <tr ng-repeat="row in mine_grid.rows">
+            <td ng-repeat="spot in row.spots" ng-click="spot.clicked = false">
+            <img ng-if="spot.clicked" src="http://luis-perez.s3-us-west-2.amazonaws.com/angularjs-minesweeper-game/covered.png" />
+                <img ng-if="!spot.clicked && !spot.isMined" src="http://luis-perez.s3-us-west-2.amazonaws.com/angularjs-minesweeper-game/empty.png" />
+                <img ng-if="!spot.clicked && spot.isMined" src="http://luis-perez.s3-us-west-2.amazonaws.com/angularjs-minesweeper-game/mine.png" />
+                           
+            </td>
+        </tr>
+    </table>
+              
+</div>
+</body>
+</html>
+
