@@ -1,15 +1,16 @@
-angular.module('minefield', [])
-  .controller('MinefieldController', MinefieldController);
+angular.module('minefield1', [])
+  .controller('MinefieldController1', MinefieldController);
 
-function MinefieldController($scope) {
+function MinefieldController($scope, $window) {
     var minefield = {};
     minefield.rows = [];
-
-    for(var i = 0; i < 10; i++) {
+    
+    userInputProcess(minefield);
+    for(var i = 0; i < minefield.height; i++) {
         var row = {};
         row.squares = [];
         
-        for(var j = 0; j < 10; j++) {
+        for(var j = 0; j < minefield.width; j++) {
             var square = {};
             square.clicked = true;
             square.isMined = false;
@@ -22,6 +23,17 @@ function MinefieldController($scope) {
     placeManyMines(minefield);
     return minefield;
 }
+
+function userInputProcess(minefield) {
+  if (minefield.width) {
+    minefield.width = minefield.width;
+    minefield.height = minefield.height;
+  } else {
+    minefield.width = 9; 
+    minefield.height = 9; 
+  }
+}
+
 
 function randomSpot(minefield, row, col) {
   return minefield.rows[row].squares[col];
@@ -39,6 +51,5 @@ function placeManyMines(minefield) {
     mineRandom(minefield);
   }
 }
-
 
 
