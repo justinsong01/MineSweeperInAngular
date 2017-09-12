@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +11,13 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+     <link rel="stylesheet" type="text/css" media="screen" href="css/styles.css">
      <script src="Minefield.js"></script>
+     <script src="Minefield1.js"></script>
 </head>
 <body>
 
-<div ng-app="minefield" id="minefield" ng-controller="MinefieldController as mine_grid">
+<div ng-app="minefield1" id="minefield" ng-controller="MinefieldController1 as mine_grid">
  
     <table border="1">
         <tr ng-repeat="row in mine_grid.rows">
@@ -30,11 +30,36 @@
 
         </tr>
     </table>
+    <br>
+    <table>
+      <tr>
+          <td><div id='cur_mode'></div></td>
+                        <td><label for="height">Height</label></td>
+                        <td><label for="width">Width</label></td>
+                        <td><label for="mine">Mines</label></td>
+                    </tr>
+                    <tr>
+                        <td><button type='button' id='start'>Start!</button></td>
+                        <td><input name="height" type="number" min="1" max="50" value="{{mine_grid.height}}" ng-model="mind_grid.height" /></td>
+                        <td><input name="width" type="number" min="1" max="50" value="{{mine_grid.width}}" ng-model="mine_grid.width" /></td>
+                        <td><input type='text' id='mine_num' ></td>
+                        <td><select onchange="setDefault()" id='difficulty'>
+                                <option value='beg'>Beginner</option>
+                                <option value='int'>Intermediate</option>
+                                <option value='adv'>Advanced</option>
+                                <option value='cust'>Custom</option>
+                            </select>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="range" min="0" max="50" value="{{mine_grid.height}}" ng-model="mine_grid.height" /> </td>
+                        <td><input type="range" min="0" max="50" value="{{mine_grid.width}}" ng-model="mine_grid.width" /></td>
+                        <td><input type='range' id='mine_in' min='1' max='100' value='0' onchange='grabNewVals()'></td>
+                        
+                    </tr>
+                </table>
 
-<br>
-    <label for="width">Width</label><input name="width" type="number" min="1" max="50" ng-model="width_length" />
-<label for="height">Height</label><input name="height" type="number" min="1" max="50" ng-model="height_length" />
-              
+<br>          
 </div>
 </body>
 </html>
