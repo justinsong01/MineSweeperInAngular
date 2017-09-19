@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,19 +18,18 @@
 </head>
 <body>
 
-<div ng-app="minefield1" id="minefield" ng-controller="MinefieldController1 as mine_grid">
+<div ng-app="minefield1" id="minefield" ng-controller="MinefieldController1" ng-init="initstate()">
  
-    <table border="1">
-        <tr ng-repeat="row in mine_grid.rows">
-            <td ng-repeat="square in row.squares" ng-click="square.clicked = false">
-            <img ng-if="square.clicked" src="http://luis-perez.s3-us-west-2.amazonaws.com/angularjs-minesweeper-game/covered.png" />
-                <img ng-if="!square.clicked && !square.isMined" src="http://luis-perez.s3-us-west-2.amazonaws.com/angularjs-minesweeper-game/empty.png" />
-                <img ng-if="!square.clicked && square.isMined" src="http://luis-perez.s3-us-west-2.amazonaws.com/angularjs-minesweeper-game/mine.png" />
-                           
+    <table class="gdtable" border="1">
+        <tr ng-repeat="n in heightRange();">
+            <td ng-repeat="m in widthRange();" class="gdtd">
+                <button ng-class="show(state[n][m])" ng-click="reveal(n, m);">{{check(state[n][m], n, m)}}</button>
             </td>
-
         </tr>
     </table>
+    </table>
+    <br>
+
     <br>
     <table>
       <tr>
@@ -39,21 +39,21 @@
                         <td><label for="mine">Mines</label></td>
                     </tr>
                     <tr>
-                        <td><button type='button' id='start'>Start!</button></td>
-                        <td><input name="height" type="number" min="1" max="50" value="{{mine_grid.height}}" ng-model="mind_grid.height" /></td>
-                        <td><input name="width" type="number" min="1" max="50" value="{{mine_grid.width}}" ng-model="mine_grid.width" /></td>
+                        <td><button type='button' id='start' ng-click="createTable()">Start!</button></td>
+                        <td><input name="height" type="number" min="1" max="50" ng-model="height" placeholder="Please enter your value" /></td>
+                        <td><input name="width" type="number" min="1" max="50" value="{{width}}" ng-model="width" /></td>
                         <td><input type='text' id='mine_num' ></td>
                         <td><select onchange="setDefault()" id='difficulty'>
                                 <option value='beg'>Beginner</option>
                                 <option value='int'>Intermediate</option>
                                 <option value='adv'>Advanced</option>
                                 <option value='cust'>Custom</option>
-                            </select>
+                            </select></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="range" min="0" max="50" value="{{mine_grid.height}}" ng-model="mine_grid.height" /> </td>
-                        <td><input type="range" min="0" max="50" value="{{mine_grid.width}}" ng-model="mine_grid.width" /></td>
+                        <td><input type="range" min="1" max="50" value="{{height}}" ng-model="height" /> </td>
+                        <td><input type="range" min="1" max="50" value="{{width}}" ng-model="width" /></td>
                         <td><input type='range' id='mine_in' min='1' max='100' value='0' onchange='grabNewVals()'></td>
                         
                     </tr>
