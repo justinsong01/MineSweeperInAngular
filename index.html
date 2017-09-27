@@ -18,12 +18,12 @@
 </head>
 <body>
 
-<div ng-app="minefield1" id="minefield" ng-controller="MinefieldController1" ng-init="initstate()">
+<div ng-app="minefield1" id="minefield" ng-controller="MinefieldController1">
  
-    <table class="gdtable" border="1">
+    <table class="gdtable" border="1" ng-init="initstate()">
         <tr ng-repeat="n in heightRange();">
             <td ng-repeat="m in widthRange();" class="gdtd">
-                <button ng-class="show(state[n][m])" ng-click="reveal(n, m);">{{check(state[n][m], n, m)}}</button>
+                <button ng-class="show(state[n][m])" ng-disabled="gameDisable" ng-click="reveal(n, m);">{{check(state[n][m], n, m)}}</button>
             </td>
         </tr>
     </table>
@@ -39,22 +39,18 @@
                         <td><label for="mine">Mines</label></td>
                     </tr>
                     <tr>
-                        <td><button type='button' id='start' ng-click="createTable()">Start!</button></td>
-                        <td><input name="height" type="number" min="1" max="50" ng-model="height" placeholder="Please enter your value" /></td>
-                        <td><input name="width" type="number" min="1" max="50" value="{{width}}" ng-model="width" /></td>
-                        <td><input type='text' id='mine_num' ></td>
-                        <td><select onchange="setDefault()" id='difficulty'>
-                                <option value='beg'>Beginner</option>
-                                <option value='int'>Intermediate</option>
-                                <option value='adv'>Advanced</option>
-                                <option value='cust'>Custom</option>
+                        <td><button type='button' id='start' ng-click="reinit()">Start!</button></td>
+                        <td><input name="height" type="number" min="1" max="50" ng-model="height" ng-disabled="customDisable"/></td>
+                        <td><input name="width" type="number" min="1" max="50" value="{{width}}" ng-model="width" ng-disabled="customDisable" /></td>
+                        <td><input name="mine" type="number" min="1" max="50" value="{{mine}}" ng-model="mine"  ng-disabled="customDisable"></td>
+                        <td><select ng-change="updateMode()" ng-model="mode" ng-options="mode for mode in modes">>
                             </select></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="range" min="1" max="50" value="{{height}}" ng-model="height" /> </td>
-                        <td><input type="range" min="1" max="50" value="{{width}}" ng-model="width" /></td>
-                        <td><input type='range' id='mine_in' min='1' max='100' value='0' onchange='grabNewVals()'></td>
+                        <td><input type="range" min="1" max="50" value="{{height}}" ng-model="height" ng-disabled="customDisable" /> </td>
+                        <td><input type="range" min="1" max="50" value="{{width}}" ng-model="width" ng-disabled="customDisable" /></td>
+                        <td><input type="range" min="1" max="50" value="{{mine}}" ng-model="mine" ng-disabled="customDisable"></td>
                         
                     </tr>
                 </table>
